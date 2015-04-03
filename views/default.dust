@@ -1,13 +1,70 @@
 {>"master" /}
-
+<link rel="stylesheet" href="assets/css/select2.min.css" />
 {<body}
-	<div id="page-wrapper">
-		<div class="row">
-			<div class="col-lg-12">
-			
-				<div class="alert alert-info"><h1>{@pre type="content" key="header"/}</h1></div>
-				<p class="lead">{@pre type="content" key="description"/}</p>
+<div class="page-content">
+	<div class="page-header">
+		<h1>
+			Hi {user}, <small>Select a profile to begin</small> 
+			<small>&nbsp;</small>
+		</h1>
+	</div><!-- /.page-header -->
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div class="col-lg-7">
+				<form name="form1" method="post" class="form-horizontal" role="form">
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right">Enter Stage</label>
+						<div class="control-label col-xs-12 col-sm-5 no-padding-right">								
+							<input class="form-control" type="text" value="stage2c">
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right">Select a Cataegory</label>
+						<div class="control-label col-xs-12 col-sm-5 no-padding-right">								
+							<select  id="category" name="category" class="select2" data-placeholder="Choose Profile">	
+
+								<option value="transcations" >Transactions</option>
+								<option value="issue" >issues</option>
+								<option value="documentation" >Documentation</option>
+
+							</select>
+						</div>
+					</div>
+					<div class="form-group" id="getprofiles" style="display:none">
+						<label class="control-label col-xs-12 col-sm-3 no-padding-right">Select a Profile</label>
+						<div class="control-label col-xs-12 col-sm-5 no-padding-right">								
+							<select  id="profiles" name="profiles" class="select2" data-placeholder="Choose Profile">	
+
+								{#data}
+									<option value="{.}">{.}</option>
+								{/data}
+							</select>
+						</div>
+					</div>
+					<div class="form-group" id="progress" style="display:none">
+					<p  align="center">Please Wait...<img src="assets/img/loading.gif"></p>
+					</div>
+				</form>
 			</div>
+				
 		</div>
-	</div>
+			
+			<!-- PAGE CONTENT ENDS -->
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+</div><!-- /.page-content -->	
 {/body}
+<script src="assets/js/select2.min.js"></script>
+<script>
+$(document).ready(function(){
+$('#category').css('width','400px').select2({allowClear:true,placeholder: 'Select a Category',});
+$('#profiles').css('width','400px').select2({allowClear:true,placeholder: 'Select a Profile',});
+	$("#profiles").on('change',function(){
+		$("#progress").slideToggle('slow');
+	})	;
+	$("#category").on('change',function(){
+		$("#getprofiles").slideToggle('slow');
+	})
+});
+</script>

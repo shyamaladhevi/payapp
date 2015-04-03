@@ -1,0 +1,28 @@
+{>"master" /}
+<link rel="stylesheet" href="assets/css/select2.min.css" />
+{<body}
+<div class="page-content">
+
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+		<h1>
+			Access to this page was restricted to  <em><strong>{user}</strong></em>
+			
+		</h1>
+		<h4>Please Contact Administrator</h4>
+		<hr>
+		<a class="btn btn-primary btn-lg" href="/admin">Proceed</a>
+		</div>
+			
+			<!-- PAGE CONTENT ENDS -->
+		</div><!-- /.col -->
+	</div><!-- /.row -->
+</div><!-- /.page-content -->	
+{/body}
+<script>
+$(document).ready(function(){
+	$("#menu1").removeClass("active open ");
+	$("#menu2").addClass("active open hover");
+})
+</script>
