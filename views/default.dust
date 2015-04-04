@@ -11,7 +11,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			<!-- PAGE CONTENT BEGINS -->
-			<div class="col-lg-7">
+			<div class="center">
 				<form name="form1" method="post" class="form-horizontal" role="form">
 					<div class="form-group">
 						<label class="control-label col-xs-12 col-sm-3 no-padding-right">Enter Stage</label>

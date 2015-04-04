@@ -10,6 +10,7 @@ var users = require('./routes/users');
 var admin = require('./routes/admin');
 var restricted = require('./routes/restricted');
 
+
 var app = express();
 var dust = require('express-dustjs');
 // view engine setup
@@ -36,6 +37,7 @@ app.use('/', routes);
 app.use('/restricted', restricted);
 app.use('/users', users);
 app.use('/admin', admin);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

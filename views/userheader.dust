@@ -3,11 +3,14 @@
 				try{ace.settings.check('navbar' , 'fixed')}catch(e){}
 			</script>
 
-			<div id="navbar-container" class="navbar-container container">				
+			<div id="navbar-container" class="navbar-container">				
 
 				<div class="navbar-header pull-left">
 					<a class="navbar-brand" href="/">
-						<img src="https://www.paypalobjects.com/webstatic/i/logo/rebrand/ppcom.svg" height="25" />
+						<small>
+							<i class="ace-icon fa fa-flask align-top bigger-125"></i> &nbsp;
+							PayPal Automation Tool
+						</small>
 					</a>
 					<button data-target="#sidebar" id="menu-toggler" class="navbar-toggle menu-toggler pull-left fixed" type="button">
 						<span class="sr-only">Toggle sidebar</span>
@@ -101,7 +104,7 @@
 								<img alt="Jason's Photo" src="assets/avatars/user.jpg" class="nav-user-photo">
 								<span class="user-info">
 									<small>Welcome,</small>
-									Jason
+									{user}
 								</span>
 
 								<i class="ace-icon fa fa-caret-down"></i>
