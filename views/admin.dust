@@ -97,7 +97,7 @@
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"> Profile Name </label>
 								<div class="col-sm-6">
-									<input type="text" name="profile[name]" ng-model="profile.name" class="col-xs-10 col-sm-5" placeholder="Profile Name Required" id="profileName" data-content="Heads up! This alert needs your attention, but it's not super important." title="" data-rel="popover" data-original-title="Default" aria-describedby="popover849697">
+									<input type="text" name="profile[name]"  class="col-xs-10 col-sm-5" placeholder="Profile Name Required" id="profileName" data-content="Heads up! This alert needs your attention, but it's not super important." title="" data-rel="popover" data-original-title="Default" aria-describedby="popover849697">
 								</div>
 								<div class="col-sm-3">
 									<button type="button" class="btn btn-success" id="btnparams" data-toggle="modal" role="button" href="#modal-form" >Add Parameters</button>
@@ -107,40 +107,7 @@
 							<div id="params">
 								
 							</div>
-							{{profile |json}}
-							<div id="shuttemp" style="visibility:hidden">
-								<section>
-								<div class="row">
-									<div class="col-lg-12">
-										<table class="table">
-										<tr>
-											<td style="background-color:#FFFFFF">
-												<h2> <i class="ace-icon fa fa-cogs"></i> Shutodown</h2>
-											</td>
-											<td>
-												<table class="table table-condensed">											
-													<tr>
-														<th>Order </th>
-														<td><input ng-model="profile.order.no" type="text" class="form-control shutorder" value=""></td>
-													</tr>
-													<tr>
-														<th>Choose Components </th>
-														<td>
-														<select multiple="" style="width:400px" class="services" ng-model="profile.order.no.components">
-																{#data}
-																	<option value="{.}">{.}</option>
-																{/data}
-														</select>
-														</td>
-													</tr>
-												</table>
-											</td>
-										</tr>								
-									</table>
-									</div>
-								</div>
-							</section>
-							</div>
+							
 							<!--<div id="disparam">					
 							
 							</div> -->
@@ -161,12 +128,10 @@
 <script src="assets/js/dataTables.tableTools.min.js"></script>
 <script src="assets/js/dataTables.colVis.min.js"></script>
 <script src="assets/js/select2.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+
 <script>
 $(document).ready(function(){
-
-
-	$('.services').css('width','400px').select2({allowClear:true,placeholder: 'Select a Profile'});
+	
 	$("#menu1").removeClass("active open ");
 	$("#menu2").addClass("active open hover");
 	$("#table1").dataTable();
@@ -178,8 +143,17 @@ $(document).ready(function(){
 		totalparams=totalparams +1;
 		}
 		$("#shuttemp").find("input.shutorder").val(totalparams);
-		$("#params").append($("#shuttemp").html());
-	})
+		var gettemplate=shuttemp(totalparams);
+		$("#params").append(gettemplate);
+
+	});
+	$('body').on('click','#shutdown',function (e) {
+		e.preventDefault();
+		$('select.services').css('width','400px').select2({allowClear:true,placeholder: 'Select a Profile'});
+	});
+	function shuttemp(id){
+	return '<section><div class="row"><div class="col-lg-12"><table class="table"><tr><td style="background-color:#FFFFFF"><h2> <i class="ace-icon fa fa-cogs"></i> Shutodown</h2></td><td><table class="table table-condensed"><tr><th>Order </th><td><input type="text" class="form-control shutorder" value="'+id+'"></td></tr><tr><th>Choose Components </th><td><select multiple="" class="services">{#data}<option value="{.}">{.}</option>{/data}</select></td></tr></table></td></tr></table></div></div></section>';
+	}
 	
-})
+});
 </script>
