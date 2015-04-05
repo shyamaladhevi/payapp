@@ -8,7 +8,8 @@
 		<div class="col-lg-8 col-lg-offset-2">
 		<!-- PAGE CONTENT BEGINS -->
 		<legend>Create / Manage Profiles </legend>
-
+		
+		
 		<div class="tabbable">
 			<ul id="myTab" class="nav nav-tabs">
 				<li class="active">
@@ -81,6 +82,7 @@
 												<div class="row">
 													<div class="col-lg-12">
 														<button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" id="shutdown" ><i class="ace-icon glyphicon glyphicon-off"></i> Shutdown</button>
+														<button type="button" class="btn btn-primary btn-lg btn-block" data-dismiss="modal" id="jenkin" ><i class="ace-icon glyphicon glyphicon-road"></i> Jenkins</button>
 														<button type="button" class="btn btn-danger btn-lg btn-block" data-dismiss="modal" id="restart" ><i class="ace-icon glyphicon glyphicon-repeat"></i> Restart</button>
 														<button type="button" class="btn btn-info btn-lg btn-block" data-dismiss="modal" id="CDB" ><i class="ace-icon fa fa-desktop"></i> CDB</button>
 														<button type="button" class="btn btn-info btn-lg btn-block" data-dismiss="modal" id="wowo" ><i class="ace-icon glyphicon glyphicon-book"></i> WOWO</button>
@@ -104,14 +106,8 @@
 
 								</div>
 							</div>
-							<div id="params">
-								
-							</div>
-							
-							<!--<div id="disparam">					
-							
-							</div> -->
-							
+							<div class="row" id="params">
+							</div>							
 						</form>
 				</div>
 			</div>
@@ -135,6 +131,7 @@ $(document).ready(function(){
 	$("#menu1").removeClass("active open ");
 	$("#menu2").addClass("active open hover");
 	$("#table1").dataTable();
+	
 	$("#shutdown").click(function(){
 		var totalparams=$("#params").find('section').length;
 		if((totalparams)==0){
@@ -142,18 +139,35 @@ $(document).ready(function(){
 		}else{
 		totalparams=totalparams +1;
 		}
-		$("#shuttemp").find("input.shutorder").val(totalparams);
 		var gettemplate=shuttemp(totalparams);
 		$("#params").append(gettemplate);
 
 	});
-	$('body').on('click','#shutdown',function (e) {
-		e.preventDefault();
+	$("#jenkin").click(function(){
+		var totalparams=$("#params").find('section').length;
+		if((totalparams)==0){
+		totalparams=1;
+		}else{
+		totalparams=totalparams +1;
+		}
+		var gettemplate=jenkintemp(totalparams);
+		$("#params").append(gettemplate);
+
+	});
+	$('body').on('click','#shutdown', function(e) {
 		$('select.services').css('width','400px').select2({allowClear:true,placeholder: 'Select a Profile'});
 	});
+	
 	function shuttemp(id){
-	return '<section><div class="row"><div class="col-lg-12"><table class="table"><tr><td style="background-color:#FFFFFF"><h2> <i class="ace-icon fa fa-cogs"></i> Shutodown</h2></td><td><table class="table table-condensed"><tr><th>Order </th><td><input type="text" class="form-control shutorder" value="'+id+'"></td></tr><tr><th>Choose Components </th><td><select multiple="" class="services">{#data}<option value="{.}">{.}</option>{/data}</select></td></tr></table></td></tr></table></div></div></section>';
+	var data= '<section><div class="col-lg-12"><div class="widget-box ui-sortable-handle" style="opacity: 1;"><div class="widget-header widget-header-large"><h4 class="widget-title">Shutdown</h4><div class="widget-toolbar"><a data-action="settings" href="#"><i class="ace-icon fa fa-cog"></i></a><a data-action="reload" href="#"><i class="ace-icon fa fa-refresh"></i></a><a data-action="close" href="#"><i class="ace-icon fa fa-times"></i></a></div></div><div class="widget-body"><div class="widget-main"><div class="form-group"><label for="form-field-1" class="col-sm-3 control-label no-padding-right">Order #</label><div class="col-sm-9"><input type="text" class="col-xs-10 col-sm-5"  id="'+id+'" value="'+id+'"></div></div><div class="form-group"><label for="form-field-1" class="col-sm-3 control-label no-padding-right"> Select Components </label><div class="col-sm-9"><select multiple="" class="services">{#data}<option value="{.}">{.}</option>{/data}</select></div></div></div></div></div></div></section>';
+	return data;
 	}
 	
+	function jenkintemp(id){
+	var data='<section><div class="col-lg-12"><div class="widget-box ui-sortable-handle" style="opacity: 1;"> <div class="widget-header widget-header-large"> <h4 class="widget-title">Jenkin Jobs</h4> <div class="widget-toolbar"><a data-action="settings" href="#"><i class="ace-icon fa fa-cog"></i></a><a data-action="reload" href="#"><i class="ace-icon fa fa-refresh"></i></a><a data-action="close" href="#"><i class="ace-icon fa fa-times"></i></a></div></div><div class="widget-body"> <div class="widget-main"> <div class="form-group"> <label for="form-field-1" class="col-sm-3 control-label no-padding-right">Order #</label> <div class="col-sm-9"> <input type="text" class="col-xs-10 col-sm-5" id="'+id+'" value="'+id+'"> </div></div><div class="form-group"> <label for="form-field-1" class="col-sm-3 control-label no-padding-right"> Job Url </label> <div class="col-sm-9"> <input type="text" class="col-xs-10 col-sm-5" placeholder="jenkin Job URl" id="form-field-1"> </div></div></div></div></div></div></section>';
+	return data;
+	}
+
+
 });
 </script>
