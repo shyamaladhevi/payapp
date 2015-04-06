@@ -3,7 +3,7 @@
 <div class="page-content">
 	<div class="page-header">
 		<h1>
-			Error Occured &nbsp;
+			Error Occcured &nbsp;
 			<small>
 				
 				Error Code: {status|j|s}

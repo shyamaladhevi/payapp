@@ -23,7 +23,7 @@ app.engine('dust', dust.engine({
   useHelpers: true
 }))
 app.set('view engine', 'dust')
-app.set('views', path.resolve(__dirname, './views'))
+app.set('views', path.join(__dirname, './views'))
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(__dirname + '/public/favicon.ico'));
@@ -37,6 +37,7 @@ app.use('/', routes);
 app.use('/restricted', restricted);
 app.use('/users', users);
 app.use('/admin', admin);
+app.use('/admin/createprofile', admin);
 
 
 // catch 404 and forward to error handler

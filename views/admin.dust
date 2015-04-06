@@ -15,13 +15,13 @@
 				<li class="active">
 					<a href="#manprofiles" data-toggle="tab">
 						<h4><i class="green ace-icon fa fa-home bigger-120"></i>
-						Manage Profiles</h4>
+						Manage Profiless</h4>
 					</a>
 				</li>
 				<li>
 					<a href="#createprofiles" data-toggle="tab">
 						<h4><i class="ace-icon fa fa-rocket"></i>
-						Create New Profiles</h4>
+						Create New Profiless</h4>
 
 					</a>
 				</li>
@@ -95,11 +95,11 @@
 											
 										</div>
 									</div>
-						<form name="form1" method="post" class="form-horizontal" >
+						<form name="form1" method="post" class="form-horizontal" action="admin/createprofile/" >
 							<div class="form-group">
 								<label class="col-sm-3 control-label no-padding-right"> Profile Name </label>
 								<div class="col-sm-6">
-									<input type="text" name="profile[name]"  class="col-xs-10 col-sm-5" placeholder="Profile Name Required" id="profileName" data-content="Heads up! This alert needs your attention, but it's not super important." title="" data-rel="popover" data-original-title="Default" aria-describedby="popover849697">
+									<input type="text" name="{profile{name}}"  class="col-xs-10 col-sm-5" placeholder="Profile Name Required" id="profileName" data-content="Heads up! This alert needs your attention, but it's not super important." title="" data-rel="popover" data-original-title="Default" aria-describedby="popover849697">
 								</div>
 								<div class="col-sm-3">
 									<button type="button" class="btn btn-success" id="btnparams" data-toggle="modal" role="button" href="#modal-form" >Add Parameters</button>
@@ -107,7 +107,9 @@
 								</div>
 							</div>
 							<div class="row" id="params">
-							</div>							
+							</div>	
+						<input type="submit" value="send" name="send">
+						<div id="result"></div>
 						</form>
 				</div>
 			</div>
@@ -159,7 +161,7 @@ $(document).ready(function(){
 	});
 	
 	function shuttemp(id){
-	var data= '<section><div class="col-lg-12"><div class="widget-box ui-sortable-handle" style="opacity: 1;"><div class="widget-header widget-header-large"><h4 class="widget-title">Shutdown</h4><div class="widget-toolbar"><a data-action="settings" href="#"><i class="ace-icon fa fa-cog"></i></a><a data-action="reload" href="#"><i class="ace-icon fa fa-refresh"></i></a><a data-action="close" href="#"><i class="ace-icon fa fa-times"></i></a></div></div><div class="widget-body"><div class="widget-main"><div class="form-group"><label for="form-field-1" class="col-sm-3 control-label no-padding-right">Order #</label><div class="col-sm-9"><input type="text" class="col-xs-10 col-sm-5"  id="'+id+'" value="'+id+'"></div></div><div class="form-group"><label for="form-field-1" class="col-sm-3 control-label no-padding-right"> Select Components </label><div class="col-sm-9"><select multiple="" class="services">{#data}<option value="{.}">{.}</option>{/data}</select></div></div></div></div></div></div></section>';
+	var data= '<section><div class="col-lg-12"><div class="widget-box ui-sortable-handle" style="opacity: 1;"><div class="widget-header widget-header-large"><h4 class="widget-title">Shutdown</h4><div class="widget-toolbar"><a data-action="settings" href="#"><i class="ace-icon fa fa-cog"></i></a><a data-action="reload" href="#"><i class="ace-icon fa fa-refresh"></i></a><a data-action="close" href="#"><i class="ace-icon fa fa-times"></i></a></div></div><div class="widget-body"><div class="widget-main"><div class="form-group"><label  class="col-sm-3 control-label no-padding-right">Order #</label><div class="col-sm-9"><input type="text" class="col-xs-10 col-sm-5" name="profile{order}" value="'+id+'"  id="'+id+'" ><input type="hidden" name="profile{order}{'+id+'}{type}" value="shutdownserve"></div></div><div class="form-group"><label for="form-field-1" class="col-sm-3 control-label no-padding-right"> Select Components </label><div class="col-sm-9"><select multiple="" class="services" name="profile{order}{'+id+'}{shutdownserve}{services}">{#data}<option value="{.}">{.}</option>{/data}</select></div></div></div></div></div></div></section>';
 	return data;
 	}
 	
@@ -169,5 +171,30 @@ $(document).ready(function(){
 	}
 
 
+});
+</script>
+<script>
+$.fn.serializeObject = function()
+{
+    var o = {};
+    var a = this.serializeArray();
+    $.each(a, function() {
+        if (o[this.name] !== undefined) {
+            if (!o[this.name].push) {
+                o[this.name] = [o[this.name]];
+            }
+            o[this.name].push(this.value || '');
+        } else {
+            o[this.name] = this.value || '';
+        }
+    });
+    return o;
+};
+
+$(function() {
+    $('form').submit(function() {
+        $('#result').text(JSON.stringify($('form').serializeObject()));
+        return false;
+    });
 });
 </script>
